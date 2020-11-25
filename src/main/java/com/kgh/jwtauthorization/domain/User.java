@@ -1,5 +1,6 @@
 package com.kgh.jwtauthorization.domain;
 
+import com.kgh.jwtauthorization.domain.enums.UserRole;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -33,12 +34,13 @@ public class User {
     // 역할 지정
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.ROLE_NOT_PERMITTED;
+    private UserRole role = UserRole.ROLE_USER;
 
     // 타임스탬프 지정
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date createDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updateDate;
