@@ -38,4 +38,4 @@ out/
 
 ### application properties ###
 .application.properties
-.db.proper
+.db.properties
