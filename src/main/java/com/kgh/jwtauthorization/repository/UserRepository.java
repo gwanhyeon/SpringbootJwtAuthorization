@@ -1,10 +1,14 @@
 package com.kgh.jwtauthorization.repository;
-
-import lombok.RequiredArgsConstructor;
+import com.kgh.jwtauthorization.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 @Repository
-@RequiredArgsConstructor
-public class UserRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByEmail(String email);
+
+    Boolean existsByEmail(String email);
 
 }

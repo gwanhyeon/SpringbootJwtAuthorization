@@ -40,3 +40,4 @@ out/
 src/main/.DS_Store
 src/**/db.properties
 src/**/application.properties
+/src/main/resources/application.yml
