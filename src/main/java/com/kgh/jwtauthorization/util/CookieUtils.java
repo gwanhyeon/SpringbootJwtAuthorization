@@ -19,7 +19,6 @@ public class CookieUtils {
                 }
             }
         }
-
         return Optional.empty();
     }
 
@@ -29,6 +28,14 @@ public class CookieUtils {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
         response.addCookie(cookie);
+    }
+    public static Cookie addCookieTest(HttpServletResponse response, String name, String value, int maxAge) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(maxAge);
+        response.addCookie(cookie);
+        return cookie;
     }
 
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {

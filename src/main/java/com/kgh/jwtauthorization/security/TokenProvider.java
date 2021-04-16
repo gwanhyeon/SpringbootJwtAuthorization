@@ -16,22 +16,33 @@ public class TokenProvider {
 
     private AppProperties appProperties;
 
+    private String jwtToken = "";
+
     public TokenProvider(AppProperties appProperties) {
         this.appProperties = appProperties;
     }
 
-    public String createToken(Authentication authentication) {
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+    public String getToken(){
+        return this.jwtToken;
+    }
+    public void setToken(String jwtToken){
+        this.jwtToken = jwtToken;
+    }
 
+    public String createToken(Authentication authentication) {
+
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
 
-        return Jwts.builder()
+        String jwtToken = Jwts.builder()
                 .setSubject(Long.toString(userPrincipal.getId()))
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
                 .compact();
+        setToken(jwtToken);
+        return jwtToken;
     }
 
     public Long getUserIdFromToken(String token) {
